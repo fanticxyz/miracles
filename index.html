@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quranic Miracles | Evidence Before You</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Amiri:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Cinzel', 'serif'],
+                        body:    ['Space Grotesk', 'sans-serif'],
+                        arabic:  ['Amiri', 'serif'],
+                    },
+                    colors: {
+                        cosmic: { 950:'#020408', 900:'#080c14', 800:'#0e1520', 700:'#141d2d' },
+                        gold:   { 400:'#E5C158', 500:'#D4AF37', 300:'#F0D878' },
+                        emerald:{ 450:'#34D399', 550:'#10B981' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-cosmic-950 text-slate-200 antialiased selection:bg-gold-500 selection:text-cosmic-950">
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="grain"></div>
+<div class="cursor-dot hidden md:block"></div>
+<div class="cursor-outline hidden md:block"></div>
+<canvas id="starfield"></canvas>
+
+<!-- ═══════════════════════════════════════════════════════ NAV ═══ -->
+<nav class="fixed top-0 w-full z-50 px-6 py-6 mix-blend-difference">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <a href="#" class="font-display text-xl font-bold text-gold-gradient tracking-widest">AL-BURHAN</a>
+        <div class="hidden md:flex gap-8">
+            <a href="#journey"      class="nav-link">The Journey</a>
+            <a href="#miracles"     class="nav-link">Miracles</a>
+            <a href="#christianity" class="nav-link">Christianity</a>
+            <a href="#scientific"   class="nav-link">Scientific</a>
+            <a href="#mathematical" class="nav-link">Mathematical</a>
+            <a href="#preservation" class="nav-link">Preservation</a>
+        </div>
+        <button id="menuBtn" class="md:hidden text-gold-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+    </div>
+</nav>
+
+<div id="mobileMenu" class="fixed inset-0 bg-cosmic-950/98 backdrop-blur-xl z-40 hidden flex-col items-center justify-center gap-8">
+    <a href="#journey"      class="font-display text-2xl text-gold-400 mobile-link">The Journey</a>
+    <a href="#miracles"     class="font-display text-2xl text-gold-400 mobile-link">Miracles</a>
+    <a href="#christianity" class="font-display text-2xl text-gold-400 mobile-link">Christianity</a>
+    <a href="#scientific"   class="font-display text-2xl text-gold-400 mobile-link">Scientific</a>
+    <a href="#mathematical" class="font-display text-2xl text-gold-400 mobile-link">Mathematical</a>
+    <a href="#preservation" class="font-display text-2xl text-gold-400 mobile-link">Preservation</a>
+    <button id="closeMenu" class="absolute top-6 right-6 text-slate-400">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ HERO ═══ -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 geo-pattern opacity-40"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
+        <div class="overflow-hidden mb-6">
+            <p class="hero-subtitle text-gold-400 text-sm md:text-base tracking-[0.3em] uppercase font-display opacity-0 translate-y-full">
+                The Evidence Is Before You
+            </p>
+        </div>
+        <h1 class="hero-title font-display text-5xl md:text-7xl lg:text-9xl font-bold leading-tight mb-8">
+            <span class="block text-white opacity-0 translate-y-12">Signs in</span>
+            <span class="block text-gold-gradient mt-2 opacity-0 translate-y-12">the Universe</span>
+            <span class="block text-white mt-2 opacity-0 translate-y-12">&amp; Within</span>
+        </h1>
+        <div class="overflow-hidden mb-12 max-w-2xl mx-auto">
+            <p class="hero-body text-slate-300 text-lg md:text-xl leading-relaxed opacity-0 translate-y-8">
+                From the precision of cosmic constants to the mathematical architecture of revelation — a journey through the miracles that defy coincidence.
+            </p>
+        </div>
+        <div class="hero-cta opacity-0 scale-90">
+            <a href="#journey" class="magnetic-btn group">
+                Begin the Journey
+                <svg class="w-4 h-4 ml-3 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 opacity-0 hero-scroll">
+            <div class="w-px h-16 bg-gradient-to-b from-gold-400 to-transparent mx-auto"></div>
+        </div>
+    </div>
+    <div class="absolute bottom-20 right-6 md:right-20 max-w-xs text-right opacity-0 hero-ayah hidden md:block">
+        <p class="arabic-text text-2xl text-gold-400/90 mb-2 leading-loose" dir="rtl">
+            سَنُرِيهِمْ آيَاتِنَا فِي الْآفَاقِ وَفِي أَنفُسِهِمْ حَتَّىٰ يَتَبَيَّنَ لَهُمْ أَنَّهُ الْحَقُّ
+        </p>
+        <p class="text-xs text-slate-400 tracking-wider font-display mt-2">Fussilat 41:53</p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ JOURNEY ═══ -->
+<section id="journey" class="horizontal-section bg-cosmic-950 relative">
+    <!-- FIX: removed the gradient overlay div that was causing the black flash;
+         the bg is now set purely via CSS on .horizontal-container -->
+    <div class="horizontal-container">
+        <div class="absolute top-10 left-6 md:left-20 z-20">
+            <h2 class="font-display text-3xl md:text-5xl font-bold text-white mb-2">A Journey Through Time</h2>
+            <p class="text-slate-400 text-sm tracking-wider">Scroll to explore</p>
+        </div>
+        <div class="journey-track" id="journeyTrack">
+            <div class="journey-card rounded-lg p-8 flex flex-col justify-between group">
+                <div>
+                    <span class="text-6xl font-display text-gold-500/30 group-hover:text-gold-400/50 transition-colors">01</span>
+                    <h3 class="font-display text-2xl font-bold text-white mt-4 mb-3">The Big Bang</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">"Do not the unbelievers see that the heavens and the earth were joined together as one unit of creation, before We clove them asunder?"<br><br>The odds of cosmic constants supporting life? <span class="text-gold-400 font-semibold">1 in 10<sup>120</sup></span>.</p>
+                </div>
+                <div class="verse-badge mt-4">Al-Anbiya 21:30</div>
+            </div>
+            <div class="journey-card rounded-lg p-8 flex flex-col justify-between group">
+                <div>
+                    <span class="text-6xl font-display text-gold-500/30 group-hover:text-gold-400/50 transition-colors">02</span>
+                    <h3 class="font-display text-2xl font-bold text-white mt-4 mb-3">Cosmic Iron</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Iron melts at 1,538°C. Surah Al-Hadid (Iron) is positioned exactly <span class="text-gold-400 font-semibold">1,538 verses</span> from the Quran's mathematical center. Iron is not native to Earth — it arrived from space.</p>
+                </div>
+                <div class="verse-badge mt-4">Al-Hadid 57:25</div>
+            </div>
+            <div class="journey-card rounded-lg p-8 flex flex-col justify-between group">
+                <div>
+                    <span class="text-6xl font-display text-gold-500/30 group-hover:text-gold-400/50 transition-colors">03</span>
+                    <h3 class="font-display text-2xl font-bold text-white mt-4 mb-3">Life Emerges</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">DNA contains 3 billion base pairs of code with syntax, error correction, and molecular machinery. "We made every living thing from water." Have you ever seen code write itself?</p>
+                </div>
+                <div class="verse-badge mt-4">Al-Anbiya 21:30</div>
+            </div>
+            <div class="journey-card rounded-lg p-8 flex flex-col justify-between group">
+                <div>
+                    <span class="text-6xl font-display text-gold-500/30 group-hover:text-gold-400/50 transition-colors">04</span>
+                    <h3 class="font-display text-2xl font-bold text-white mt-4 mb-3">Consciousness</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Which atom is "you"? Point to the molecule containing your identity, dreams, and sense of self. "They ask you about the Spirit. Say: 'The Spirit is from the command of my Lord.'"</p>
+                </div>
+                <div class="verse-badge mt-4">Al-Isra 17:85</div>
+            </div>
+            <div class="journey-card rounded-lg p-8 flex flex-col justify-between group">
+                <div>
+                    <span class="text-6xl font-display text-gold-500/30 group-hover:text-gold-400/50 transition-colors">05</span>
+                    <h3 class="font-display text-2xl font-bold text-white mt-4 mb-3">Objective Morality</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Without objective morality, explain why the Holocaust was actually wrong — not just unpopular. "We have certainly created man in the best of stature."</p>
+                </div>
+                <div class="verse-badge mt-4">At-Tin 95:4</div>
+            </div>
+            <div class="journey-card rounded-lg p-8 flex flex-col justify-between group">
+                <div>
+                    <span class="text-6xl font-display text-gold-500/30 group-hover:text-gold-400/50 transition-colors">06</span>
+                    <h3 class="font-display text-2xl font-bold text-white mt-4 mb-3">Revelation</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">What if we audited religious texts like source code? An illiterate man in the 7th century brought scientific facts only discovered centuries later. Which passes the integrity check?</p>
+                </div>
+                <div class="verse-badge mt-4">Al-Baqarah 2:23</div>
+            </div>
+            <div class="journey-card rounded-lg p-8 flex flex-col justify-between group">
+                <div>
+                    <span class="text-6xl font-display text-gold-500/30 group-hover:text-gold-400/50 transition-colors">07</span>
+                    <h3 class="font-display text-2xl font-bold text-white mt-4 mb-3">Preservation</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed"><span class="text-gold-400 font-semibold">10 million+</span> have memorized the entire Quran word-for-word. Burn every copy — it returns tomorrow. "Indeed, We will be its guardian."</p>
+                </div>
+                <div class="verse-badge mt-4">Al-Hijr 15:9</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ BIG QUESTIONS ═══ -->
+<section id="big-questions" class="relative py-32 px-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20 reveal">
+            <span class="text-gold-400 text-sm tracking-[0.3em] uppercase font-display block mb-4">Philosophy &amp; Reason</span>
+            <h2 class="font-display text-4xl md:text-6xl font-bold text-white mb-6">Big <span class="text-gold-gradient">Questions</span></h2>
+            <p class="text-slate-300 text-lg max-w-2xl mx-auto">The fundamental questions of existence, purpose, and truth — addressed through reason and revelation.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal">
+                <div class="w-12 h-12 rounded-full border border-gold-400/20 flex items-center justify-center mb-6 group-hover:border-gold-400/50 transition-colors">
+                    <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <h3 class="font-display text-xl font-bold text-white mb-3">Why Are We Here?</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">"And I did not create the jinn and mankind except to worship Me." (51:56) — Understanding purpose beyond material existence.</p>
+            </div>
+            <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal">
+                <div class="w-12 h-12 rounded-full border border-gold-400/20 flex items-center justify-center mb-6 group-hover:border-gold-400/50 transition-colors">
+                    <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <h3 class="font-display text-xl font-bold text-white mb-3">What Happens After Death?</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">"Every soul will taste death. Then to Us will you be returned." (29:57) — The certainty of accountability and eternal life.</p>
+            </div>
+            <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal">
+                <div class="w-12 h-12 rounded-full border border-gold-400/20 flex items-center justify-center mb-6 group-hover:border-gold-400/50 transition-colors">
+                    <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                </div>
+                <h3 class="font-display text-xl font-bold text-white mb-3">Is There Objective Truth?</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">In an age of relativism, the Quran presents itself as absolute truth: "This is the Book about which there is no doubt." (2:2)</p>
+            </div>
+            <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal">
+                <div class="w-12 h-12 rounded-full border border-gold-400/20 flex items-center justify-center mb-6 group-hover:border-gold-400/50 transition-colors">
+                    <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                </div>
+                <h3 class="font-display text-xl font-bold text-white mb-3">The Problem of Evil</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">"Do you think you will enter Paradise while such [trial] has not yet come to you?" (2:214) — Suffering as a test and means of elevation.</p>
+            </div>
+            <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal">
+                <div class="w-12 h-12 rounded-full border border-gold-400/20 flex items-center justify-center mb-6 group-hover:border-gold-400/50 transition-colors">
+                    <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                </div>
+                <h3 class="font-display text-xl font-bold text-white mb-3">Source of Morality?</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Without divine authority, morality reduces to preference. The Quran provides objective moral framework rooted in the Divine nature.</p>
+            </div>
+            <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal">
+                <div class="w-12 h-12 rounded-full border border-gold-400/20 flex items-center justify-center mb-6 group-hover:border-gold-400/50 transition-colors">
+                    <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                </div>
+                <h3 class="font-display text-xl font-bold text-white mb-3">One God or Many?</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">"Had there been within the heavens and earth gods besides Allah, they both would have been ruined." (21:22) — The logical necessity of Tawhid.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ BIBLE VS QURAN ═══ -->
+<section id="bible-quran" class="relative py-32 px-6 bg-cosmic-900/30">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20 reveal">
+            <span class="text-gold-400 text-sm tracking-[0.3em] uppercase font-display block mb-4">Comparative Analysis</span>
+            <h2 class="font-display text-4xl md:text-6xl font-bold text-white mb-6">Bible <span class="text-gold-gradient">vs</span> Quran</h2>
+            <p class="text-slate-300 text-lg max-w-2xl mx-auto">An objective examination of preservation, consistency, and textual integrity.</p>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-12">
+            <div class="space-y-6 reveal">
+                <div class="p-8 rounded-lg border border-slate-800 bg-cosmic-950/80">
+                    <h3 class="font-display text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-sm">B</span>The Bible
+                    </h3>
+                    <ul class="space-y-4 text-slate-300 text-sm">
+                        <li class="flex items-start gap-3"><span class="text-red-400 mt-1">•</span><span>Over 300,000 textual variants in New Testament manuscripts</span></li>
+                        <li class="flex items-start gap-3"><span class="text-red-400 mt-1">•</span><span>No original manuscripts exist — earliest copies date 100+ years after authors</span></li>
+                        <li class="flex items-start gap-3"><span class="text-red-400 mt-1">•</span><span>Anonymous Gospels — authorship uncertain</span></li>
+                        <li class="flex items-start gap-3"><span class="text-red-400 mt-1">•</span><span>Council of Nicaea (325 CE) decided canonical books by vote</span></li>
+                        <li class="flex items-start gap-3"><span class="text-red-400 mt-1">•</span><span>Contains genealogical contradictions and historical inconsistencies</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="space-y-6 reveal">
+                <div class="p-8 rounded-lg border border-gold-400/20 bg-cosmic-950/80">
+                    <h3 class="font-display text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold-400/10 flex items-center justify-center text-sm text-gold-400">Q</span>The Quran
+                    </h3>
+                    <ul class="space-y-4 text-slate-300 text-sm">
+                        <li class="flex items-start gap-3"><span class="text-emerald-400 mt-1">•</span><span>Single, unambiguous Arabic text preserved verbatim since revelation</span></li>
+                        <li class="flex items-start gap-3"><span class="text-emerald-400 mt-1">•</span><span>Memorized by millions across 14 centuries — living manuscript</span></li>
+                        <li class="flex items-start gap-3"><span class="text-emerald-400 mt-1">•</span><span>1st century AH manuscripts match today's text exactly</span></li>
+                        <li class="flex items-start gap-3"><span class="text-emerald-400 mt-1">•</span><span>No council or committee decided content — revealed complete</span></li>
+                        <li class="flex items-start gap-3"><span class="text-emerald-400 mt-1">•</span><span>Internal consistency despite 23-year revelation period</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="mt-16 p-8 rounded-2xl border border-gold-400/10 bg-gradient-to-br from-cosmic-900 to-cosmic-950 reveal">
+            <div class="max-w-3xl mx-auto text-center">
+                <p class="arabic-text text-2xl md:text-3xl text-gold-400 leading-loose mb-4" dir="rtl">أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ وَلَوْ كَانَ مِنْ عِندِ غَيْرِ اللَّهِ لَوَجَدُوا فِيهِ اخْتِلَافًا كَثِيرًا</p>
+                <p class="text-slate-300 italic mb-4">"Then do they not reflect upon the Quran? If it had been from [any] other than Allah, they would have found within it much contradiction."</p>
+                <span class="text-gold-400 text-sm font-display tracking-wider">An-Nisa 4:82</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ CHRISTIANITY ═══ -->
+<!--  NOTE: Tab content IDs use prefix "c-" → e.g. c-trinity-content  -->
+<section id="christianity" class="relative py-32 px-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12 reveal">
+            <span class="text-gold-400 text-sm tracking-[0.3em] uppercase font-display block mb-4">Critical Analysis</span>
+            <h2 class="font-display text-4xl md:text-6xl font-bold text-white mb-6">Christianity <span class="text-gold-gradient">Examined</span></h2>
+            <p class="text-slate-300 text-lg max-w-2xl mx-auto">Theological and historical questions explored through reason and scripture.</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-2 mb-12 reveal" id="christianity-tabs">
+            <button class="tab-btn active" data-tab="trinity">Trinity</button>
+            <button class="tab-btn" data-tab="gospel-contradictions">Gospel Contradictions</button>
+            <button class="tab-btn" data-tab="paul-problem">Paul Problem</button>
+            <button class="tab-btn" data-tab="original-sin">Original Sin</button>
+            <button class="tab-btn" data-tab="jesus-worship">Jesus Worshipped Father</button>
+            <button class="tab-btn" data-tab="god-cannot-die">God Cannot Die</button>
+            <button class="tab-btn" data-tab="jesus-never-said">Jesus Never Said God</button>
+            <button class="tab-btn" data-tab="sent-to-jews">Sent to Jews Only</button>
+            <button class="tab-btn" data-tab="paraclete">Paraclete Prophecy</button>
+        </div>
+
+        <div id="christianity-content">
+
+            <!-- c-trinity-content -->
+            <div class="tab-content active" id="c-trinity-content">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="reveal">
+                        <h3 class="font-display text-3xl font-bold text-white mb-6">The Trinity: A Theological Puzzle</h3>
+                        <p class="text-slate-300 leading-relaxed mb-6">The doctrine of the Trinity — that God is three persons in one essence — was formalized at the Council of Nicaea in 325 CE, three centuries after Jesus. The term "Trinity" appears nowhere in the Bible.</p>
+                        <div class="space-y-4">
+                            <div class="p-4 border-l-2 border-gold-400 bg-cosmic-900/30"><p class="text-slate-300 text-sm italic">"Hear, O Israel: The Lord our God is one Lord." (Deuteronomy 6:4)</p></div>
+                            <div class="p-4 border-l-2 border-gold-400 bg-cosmic-900/30"><p class="text-slate-300 text-sm italic">"I and the Father are one" — but also "the Father is greater than I." (John 10:30, 14:28)</p></div>
+                            <div class="p-4 border-l-2 border-gold-400 bg-cosmic-900/30"><p class="text-slate-300 text-sm italic">Jesus prayed to God — does God pray to Himself? (Matthew 26:39)</p></div>
+                        </div>
+                    </div>
+                    <div class="reveal">
+                        <div class="p-8 rounded-2xl border border-slate-800 bg-cosmic-950">
+                            <h4 class="font-display text-xl text-gold-400 mb-4">The Quranic Position</h4>
+                            <p class="arabic-text text-2xl text-white leading-loose mb-4" dir="rtl">قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ</p>
+                            <p class="text-slate-400 text-sm italic">"Say, He is Allah, [who is] One, Allah, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent." (112:1-4)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- c-gospel-contradictions-content -->
+            <div class="tab-content" id="c-gospel-contradictions-content">
+                <div class="max-w-4xl mx-auto">
+                    <h3 class="font-display text-3xl font-bold text-white mb-8 text-center">Gospel Contradictions</h3>
+                    <div class="space-y-6">
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-900/50 reveal">
+                            <h4 class="text-gold-400 font-display mb-3">Genealogy of Jesus</h4>
+                            <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
+                                <div><span class="text-white font-semibold block mb-1">Matthew 1:1-17</span>42 generations from Abraham to Jesus, through Solomon. Joseph's father is Jacob.</div>
+                                <div><span class="text-white font-semibold block mb-1">Luke 3:23-38</span>56 generations from Abraham to Jesus, through Nathan. Joseph's father is Heli.</div>
+                            </div>
+                        </div>
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-900/50 reveal">
+                            <h4 class="text-gold-400 font-display mb-3">The Last Words</h4>
+                            <div class="grid md:grid-cols-3 gap-4 text-sm text-slate-300">
+                                <div><span class="text-white font-semibold block mb-1">Matthew 27:46</span>"My God, my God, why have you forsaken me?"</div>
+                                <div><span class="text-white font-semibold block mb-1">Luke 23:46</span>"Father, into your hands I commit my spirit."</div>
+                                <div><span class="text-white font-semibold block mb-1">John 19:30</span>"It is finished."</div>
+                            </div>
+                        </div>
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-900/50 reveal">
+                            <h4 class="text-gold-400 font-display mb-3">Women at the Tomb</h4>
+                            <div class="grid md:grid-cols-4 gap-4 text-sm text-slate-300">
+                                <div><span class="text-white font-semibold block mb-1">Matthew 28:1</span>Mary Magdalene and the other Mary.</div>
+                                <div><span class="text-white font-semibold block mb-1">Mark 16:1</span>Mary Magdalene, Mary mother of James, and Salome.</div>
+                                <div><span class="text-white font-semibold block mb-1">Luke 24:10</span>Mary Magdalene, Joanna, Mary mother of James, and others.</div>
+                                <div><span class="text-white font-semibold block mb-1">John 20:1</span>Mary Magdalene alone.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- c-paul-problem-content -->
+            <div class="tab-content" id="c-paul-problem-content">
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <div class="reveal">
+                        <h3 class="font-display text-3xl font-bold text-white mb-6">The Paul Problem</h3>
+                        <p class="text-slate-300 leading-relaxed mb-6">Paul (Saul of Tarsus) never met Jesus in his lifetime, yet his writings form the theological foundation of Christianity. He claimed authority through a vision on the road to Damascus.</p>
+                        <div class="space-y-4">
+                            <div class="p-4 border border-slate-800 rounded bg-cosmic-900/30"><p class="text-slate-300 text-sm">Paul taught that the Law was a curse (Galatians 3:13), while Jesus said he came not to abolish the Law but to fulfill it (Matthew 5:17).</p></div>
+                            <div class="p-4 border border-slate-800 rounded bg-cosmic-900/30"><p class="text-slate-300 text-sm">Paul claimed apostleship by his own testimony, while the original disciples were chosen by Jesus himself.</p></div>
+                        </div>
+                    </div>
+                    <div class="reveal">
+                        <div class="p-8 rounded-2xl border border-slate-800 bg-cosmic-950">
+                            <blockquote class="text-slate-300 italic mb-4">"I have been crucified with Christ. It is no longer I who live, but Christ who lives in me." — Paul's theology centers on crucifixion, yet Jesus in the Gospels emphasizes obedience and submission to God's will.</blockquote>
+                            <p class="text-slate-400 text-sm">The Quran confirms Jesus was not crucified: "They did not kill him, nor did they crucify him, but [another] was made to resemble him to them." (4:157)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- c-original-sin-content -->
+            <div class="tab-content" id="c-original-sin-content">
+                <div class="max-w-4xl mx-auto text-center reveal">
+                    <h3 class="font-display text-3xl font-bold text-white mb-8">Original Sin: Inherited Guilt?</h3>
+                    <p class="text-slate-300 text-lg mb-8">The concept that all humanity inherits the sin of Adam contradicts the Biblical principle: "The son shall not bear the iniquity of the father." (Ezekiel 18:20)</p>
+                    <div class="p-8 rounded-2xl border border-gold-400/20 bg-gradient-to-br from-cosmic-900 to-cosmic-950">
+                        <p class="arabic-text text-3xl text-gold-400 leading-loose mb-4" dir="rtl">وَلَا تَزِرُ وَازِرَةٌ وِزْرَ أُخْرَىٰ</p>
+                        <p class="text-white text-xl italic">"And no bearer of burdens will bear the burden of another."</p>
+                        <p class="text-gold-400 text-sm font-display mt-4 tracking-wider">Surah Az-Zumar 39:7</p>
+                    </div>
+                    <p class="text-slate-400 mt-8">The Quran teaches personal accountability — each soul is responsible only for its own deeds, not the sins of ancestors.</p>
+                </div>
+            </div>
+
+            <!-- c-jesus-worship-content -->
+            <div class="tab-content" id="c-jesus-worship-content">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="reveal">
+                        <h3 class="font-display text-3xl font-bold text-white mb-6">Jesus Worshipped the Father</h3>
+                        <p class="text-slate-300 leading-relaxed mb-6">Throughout the Gospels, Jesus is depicted as praying, submitting, and worshipping God — behaviours inconsistent with deity.</p>
+                        <ul class="space-y-3 text-slate-300 text-sm">
+                            <li class="flex items-start gap-2"><span class="text-gold-400">→</span><span>"My Father is greater than I." (John 14:28)</span></li>
+                            <li class="flex items-start gap-2"><span class="text-gold-400">→</span><span>"I can of mine own self do nothing." (John 5:30)</span></li>
+                            <li class="flex items-start gap-2"><span class="text-gold-400">→</span><span>"Not my will, but thine, be done." (Luke 22:42)</span></li>
+                            <li class="flex items-start gap-2"><span class="text-gold-400">→</span><span>"Why do you call me good? No one is good except God alone." (Mark 10:18)</span></li>
+                        </ul>
+                    </div>
+                    <div class="reveal">
+                        <div class="p-8 rounded-2xl border border-slate-800 bg-cosmic-950">
+                            <p class="text-slate-300 mb-4">The Quran confirms Jesus as a prophet and messenger who submitted to God's will:</p>
+                            <p class="arabic-text text-2xl text-gold-400 leading-loose" dir="rtl">إِنَّ اللَّهَ رَبِّي وَرَبُّكُمْ فَاعْبُدُوهُ ۚ هَٰذَا صِرَاطٌ مُّسْتَقِيمٌ</p>
+                            <p class="text-slate-400 text-sm mt-4 italic">"Indeed, Allah is my Lord and your Lord, so worship Him. That is the straight path." (3:51)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- c-god-cannot-die-content -->
+            <div class="tab-content" id="c-god-cannot-die-content">
+                <div class="max-w-4xl mx-auto reveal">
+                    <div class="text-center mb-12">
+                        <h3 class="font-display text-3xl font-bold text-white mb-6">Can God Die?</h3>
+                        <p class="text-slate-300 text-lg">The crucifixion implies God died for three days. Yet the Bible states God is immortal and eternal.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-900/50">
+                            <h4 class="text-gold-400 font-display mb-3">The Dilemma</h4>
+                            <p class="text-slate-300 text-sm">If Jesus is God, and God died on the cross, who was running the universe during those three days? If Jesus' divine nature did not die, then only a man died — insufficient for atonement.</p>
+                        </div>
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-900/50">
+                            <h4 class="text-gold-400 font-display mb-3">The Quranic Affirmation</h4>
+                            <p class="text-slate-300 text-sm">"Allah — there is no deity except Him, the Ever-Living, the Sustainer of existence." (2:255) — God is inherently immortal and cannot die.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- c-jesus-never-said-content -->
+            <div class="tab-content" id="c-jesus-never-said-content">
+                <div class="max-w-4xl mx-auto reveal">
+                    <h3 class="font-display text-3xl font-bold text-white mb-8 text-center">"I Am God" — Missing Words</h3>
+                    <p class="text-slate-300 text-center mb-12">Nowhere in the Gospels does Jesus explicitly state "I am God" or "Worship me." The claims of divinity are inferred by others, not stated by Jesus himself.</p>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-900/50 text-center">
+                            <div class="text-4xl mb-4">🕊️</div>
+                            <h4 class="text-white font-display mb-2">Prophet</h4>
+                            <p class="text-slate-400 text-sm">Jesus called himself a prophet: "A prophet is not without honor, except in his hometown." (Mark 6:4)</p>
+                        </div>
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-900/50 text-center">
+                            <div class="text-4xl mb-4">👑</div>
+                            <h4 class="text-white font-display mb-2">Messiah</h4>
+                            <p class="text-slate-400 text-sm">He accepted the title Messiah/Christ — an anointed servant of God, not God incarnate.</p>
+                        </div>
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-900/50 text-center">
+                            <div class="text-4xl mb-4">📖</div>
+                            <h4 class="text-white font-display mb-2">Teacher</h4>
+                            <p class="text-slate-400 text-sm">"Rabbi" — teacher — was his most common title, emphasizing his role as guide, not object of worship.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- c-sent-to-jews-content -->
+            <div class="tab-content" id="c-sent-to-jews-content">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="reveal">
+                        <h3 class="font-display text-3xl font-bold text-white mb-6">Sent to the Lost Sheep of Israel</h3>
+                        <p class="text-slate-300 leading-relaxed mb-6">Jesus explicitly limited his mission to the Israelites: "I was sent only to the lost sheep of Israel." (Matthew 15:24)</p>
+                        <div class="space-y-4">
+                            <div class="p-4 border-l-2 border-gold-400 bg-cosmic-900/30"><p class="text-slate-300 text-sm">"Go nowhere among the Gentiles and enter no town of the Samaritans, but go rather to the lost sheep of the house of Israel." (Matthew 10:5-6)</p></div>
+                            <div class="p-4 border-l-2 border-gold-400 bg-cosmic-900/30"><p class="text-slate-300 text-sm">The universal mission came through Paul, not Jesus — a fundamental shift from Jesus' own words.</p></div>
+                        </div>
+                    </div>
+                    <div class="reveal">
+                        <div class="p-8 rounded-2xl border border-slate-800 bg-cosmic-950">
+                            <h4 class="text-gold-400 font-display mb-4">The Universal Prophet</h4>
+                            <p class="text-slate-300 mb-4">The Quran presents Muhammad ﷺ as the universal messenger for all humanity:</p>
+                            <p class="arabic-text text-2xl text-gold-400 leading-loose" dir="rtl">وَمَا أَرْسَلْنَاكَ إِلَّا كَافَّةً لِّلنَّاسِ بَشِيرًا وَنَذِيرًا</p>
+                            <p class="text-slate-400 text-sm mt-4 italic">"And We have not sent you except comprehensively to mankind, as a bringer of good tidings and a warner." (34:28)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- c-paraclete-content -->
+            <div class="tab-content" id="c-paraclete-content">
+                <div class="max-w-4xl mx-auto reveal">
+                    <h3 class="font-display text-3xl font-bold text-white mb-8 text-center">The Paraclete Prophecy</h3>
+                    <p class="text-slate-300 text-center mb-12">In John 14:16, Jesus promises "another Paraclete" (Greek: Parakletos). Biblical scholars note the striking similarity between "Parakletos" and "Periklytos" (praised one) — the Greek translation of "Ahmad."</p>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-900/50">
+                            <h4 class="text-gold-400 font-display mb-3">John 14:16</h4>
+                            <p class="text-slate-300 text-sm italic mb-3">"And I will ask the Father, and he will give you another Advocate (Paraclete), to be with you forever."</p>
+                            <p class="text-slate-400 text-xs">The "another" implies one like Jesus — a human messenger, not a spirit.</p>
+                        </div>
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-900/50">
+                            <h4 class="text-gold-400 font-display mb-3">John 16:7</h4>
+                            <p class="text-slate-300 text-sm italic mb-3">"Nevertheless I tell you the truth; It is expedient for you that I go away: for if I go not away, the Comforter will not come unto you."</p>
+                            <p class="text-slate-400 text-xs">The Comforter comes only after Jesus departs — fitting the historical timeline of Muhammad ﷺ.</p>
+                        </div>
+                    </div>
+                    <div class="mt-8 p-8 rounded-2xl border border-gold-400/20 bg-gradient-to-br from-cosmic-900 to-cosmic-950 text-center">
+                        <p class="arabic-text text-2xl text-gold-400 leading-loose mb-4" dir="rtl">وَإِذْ قَالَ عِيسَى ابْنُ مَرْيَمَ يَا بَنِي إِسْرَائِيلَ إِنِّي رَسُولُ اللَّهِ إِلَيْكُم مُّصَدِّقًا لِّمَا بَيْنَ يَدَيَّ مِنَ التَّوْرَاةِ وَمُبَشِّرًا بِرَسُولٍ يَأْتِي مِن بَعْدِي اسْمُهُ أَحْمَدُ</p>
+                        <p class="text-slate-300 italic">"And remember when Jesus, son of Mary, said: 'O children of Israel, indeed I am the messenger of Allah to you confirming what came before me of the Torah and bringing good tidings of a messenger to come after me, whose name is Ahmad.'" (61:6)</p>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end christianity-content -->
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ MIRACLES ═══ -->
+<!--  NOTE: Tab content IDs use prefix "m-" to avoid collisions with
+      nav section IDs  (#scientific, #mathematical, etc.)             -->
+<section id="miracles" class="relative py-32 px-6 bg-cosmic-900/30">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12 reveal">
+            <span class="text-gold-400 text-sm tracking-[0.3em] uppercase font-display block mb-4">Divine Signs</span>
+            <h2 class="font-display text-4xl md:text-6xl font-bold text-white mb-6">Miracles <span class="text-gold-gradient">of the Quran</span></h2>
+            <p class="text-slate-300 text-lg max-w-2xl mx-auto">Evidence spanning science, history, mathematics, and language — challenging humanity to produce its equal.</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-2 mb-12 reveal" id="miracles-tabs">
+            <button class="tab-btn active" data-tab="verified">Verified</button>
+            <button class="tab-btn" data-tab="scientific">Scientific</button>
+            <button class="tab-btn" data-tab="historical">Historical</button>
+            <button class="tab-btn" data-tab="mathematical">Mathematical</button>
+            <button class="tab-btn" data-tab="linguistic">Linguistic</button>
+            <button class="tab-btn" data-tab="prophecies">Prophecies</button>
+        </div>
+
+        <div id="miracles-content">
+
+            <!-- m-verified-content -->
+            <div class="tab-content active" id="m-verified-content">
+                <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                    <div class="reveal">
+                        <h3 class="font-display text-3xl font-bold text-white mb-6">Verified Miracles</h3>
+                        <p class="text-slate-300 leading-relaxed mb-6">Miracles independently verified by non-Muslim scholars, scientists, and historians — crossing religious and cultural boundaries.</p>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center flex-shrink-0 mt-1"><svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+                                <div><h4 class="text-white font-medium mb-1">Embryology</h4><p class="text-slate-400 text-sm">Confirmed by Professor Keith Moore, University of Toronto</p></div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center flex-shrink-0 mt-1"><svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+                                <div><h4 class="text-white font-medium mb-1">Oceanography</h4><p class="text-slate-400 text-sm">Confirmed by Dr. William Hay, Yale University</p></div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center flex-shrink-0 mt-1"><svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+                                <div><h4 class="text-white font-medium mb-1">Geology</h4><p class="text-slate-400 text-sm">Mountains as stabilizers confirmed by modern research</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reveal">
+                        <div class="p-8 rounded-2xl border border-gold-400/20 bg-gradient-to-br from-cosmic-900 to-cosmic-950">
+                            <p class="text-slate-300 text-center mb-6">The Quran challenges: "If you are in doubt about what We have sent down to Our servant, then produce a surah the like thereof…" (2:23)</p>
+                            <div class="text-center"><span class="verse-badge">Challenge Open for 1400+ Years</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- m-scientific-content  ← FIX: was "scientific-content", now "m-scientific-content" -->
+            <div class="tab-content" id="m-scientific-content">
+                <div class="grid lg:grid-cols-2 gap-20 items-center mb-16">
+                    <div class="reveal">
+                        <span class="text-gold-400 text-sm tracking-[0.3em] uppercase font-display block mb-4">Scientific Facts</span>
+                        <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Foreknowledge of<br><span class="text-gold-gradient">Modern Science</span></h2>
+                        <p class="text-slate-300 text-lg leading-relaxed mb-8">Statements in the Quran align with scientific discoveries made centuries after its revelation. Not vague poetry — precise, specific, and verifiable claims.</p>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="border border-slate-800 p-4 rounded bg-cosmic-900/30">
+                                <div class="text-3xl font-display text-gold-400 mb-1 counter-value" data-target="1400">0</div>
+                                <div class="text-xs text-slate-400 uppercase tracking-wider">Years Ago Revealed</div>
+                            </div>
+                            <div class="border border-slate-800 p-4 rounded bg-cosmic-900/30">
+                                <div class="text-3xl font-display text-emerald-450 mb-1 counter-value" data-target="7">0</div>
+                                <div class="text-xs text-slate-400 uppercase tracking-wider">Scientific Domains</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-4 reveal">
+                        <div class="scientific-item border border-slate-800/50 rounded-lg overflow-hidden hover:border-gold-400/30 transition-colors">
+                            <button class="w-full px-6 py-5 flex items-center justify-between text-left" onclick="toggleAccordion(this)">
+                                <div class="flex items-center gap-4"><span class="text-gold-400 font-display text-sm">01</span><span class="text-white font-medium">The Expanding Universe</span></div>
+                                <svg class="w-5 h-5 text-slate-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="accordion-content px-6 pb-5 hidden">
+                                <p class="text-slate-300 text-sm leading-relaxed mb-3">"And the heaven We constructed with strength, and indeed, We are [its] expander." (51:47)</p>
+                                <p class="text-slate-500 text-xs">Discovered by Edwin Hubble in 1929. The Quran described cosmic expansion 1,200 years before telescopes confirmed it.</p>
+                            </div>
+                        </div>
+                        <div class="scientific-item border border-slate-800/50 rounded-lg overflow-hidden hover:border-gold-400/30 transition-colors">
+                            <button class="w-full px-6 py-5 flex items-center justify-between text-left" onclick="toggleAccordion(this)">
+                                <div class="flex items-center gap-4"><span class="text-gold-400 font-display text-sm">02</span><span class="text-white font-medium">Mountains as Pegs</span></div>
+                                <svg class="w-5 h-5 text-slate-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="accordion-content px-6 pb-5 hidden">
+                                <p class="text-slate-300 text-sm leading-relaxed mb-3">"Have We not made the earth a resting place? And the mountains as stakes?" (78:6-7)</p>
+                                <p class="text-slate-500 text-xs">Modern geology confirms mountains have deep roots extending into the mantle — functioning exactly like stakes stabilizing the crust.</p>
+                            </div>
+                        </div>
+                        <div class="scientific-item border border-slate-800/50 rounded-lg overflow-hidden hover:border-gold-400/30 transition-colors">
+                            <button class="w-full px-6 py-5 flex items-center justify-between text-left" onclick="toggleAccordion(this)">
+                                <div class="flex items-center gap-4"><span class="text-gold-400 font-display text-sm">03</span><span class="text-white font-medium">Embryological Development</span></div>
+                                <svg class="w-5 h-5 text-slate-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="accordion-content px-6 pb-5 hidden">
+                                <p class="text-slate-300 text-sm leading-relaxed mb-3">"Then We made the sperm into a clot of congealed blood; then of that clot We made a lump; then We made out of that lump bones and clothed the bones with flesh." (23:14)</p>
+                                <p class="text-slate-500 text-xs">Professor Keith Moore confirmed these stages match modern embryology precisely.</p>
+                            </div>
+                        </div>
+                        <div class="scientific-item border border-slate-800/50 rounded-lg overflow-hidden hover:border-gold-400/30 transition-colors">
+                            <button class="w-full px-6 py-5 flex items-center justify-between text-left" onclick="toggleAccordion(this)">
+                                <div class="flex items-center gap-4"><span class="text-gold-400 font-display text-sm">04</span><span class="text-white font-medium">The Barrier Between Seas</span></div>
+                                <svg class="w-5 h-5 text-slate-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div class="accordion-content px-6 pb-5 hidden">
+                                <p class="text-slate-300 text-sm leading-relaxed mb-3">"He released the two seas, meeting side by side; between them is a barrier so neither of them transgresses." (55:19-20)</p>
+                                <p class="text-slate-500 text-xs">Oceanographers discovered seas maintain distinct temperature, salinity, and density barriers despite meeting.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative py-24 px-8 md:px-20 rounded-2xl border border-gold-400/20 bg-gradient-to-br from-cosmic-900 to-cosmic-950 overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-gold-400/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                    <div class="relative z-10 max-w-3xl">
+                        <p class="arabic-text text-3xl md:text-5xl text-gold-400 leading-loose mb-6" dir="rtl">وَأَنزَلْنَا الْحَدِيدَ فِيهِ بَأْسٌ شَدِيدٌ وَمَنَافِعُ لِلنَّاسِ</p>
+                        <p class="text-white text-lg md:text-xl italic leading-relaxed mb-4">"And We sent down iron, wherein is great military might and benefits for the people..."</p>
+                        <div class="flex items-center gap-4"><div class="h-px w-12 bg-gold-400/50"></div><span class="text-gold-400 text-sm font-display tracking-wider">Surah Al-Hadid 57:25</span></div>
+                        <p class="text-slate-400 text-sm mt-6 max-w-xl">Iron is not naturally occurring on Earth. It arrived via meteorites. The Quran specifies it was "sent down" — impossible to know in the 7th century without modern spectroscopy.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- m-historical-content -->
+            <div class="tab-content" id="m-historical-content">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><span class="text-4xl font-display text-gold-500/30 group-hover:text-gold-400/50 transition-colors block mb-4">01</span><h3 class="font-display text-xl font-bold text-white mb-3">The Roman Victory</h3><p class="text-slate-300 text-sm leading-relaxed">"The Romans have been defeated in the nearest land. But they, after their defeat, will overcome." (30:2-3) — Prophesied Byzantine victory over Persians within 3-9 years, fulfilled in 627 CE.</p><div class="verse-badge mt-4">Ar-Rum 30:2-3</div></div>
+                    <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><span class="text-4xl font-display text-gold-500/30 group-hover:text-gold-400/50 transition-colors block mb-4">02</span><h3 class="font-display text-xl font-bold text-white mb-3">Preservation of Pharaoh</h3><p class="text-slate-300 text-sm leading-relaxed">"Today We will preserve your body so you may be a sign to those who come after you." (10:92) — Pharaoh's body was preserved and discovered in 1881, defying natural decomposition.</p><div class="verse-badge mt-4">Yunus 10:92</div></div>
+                    <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><span class="text-4xl font-display text-gold-500/30 group-hover:text-gold-400/50 transition-colors block mb-4">03</span><h3 class="font-display text-xl font-bold text-white mb-3">The City of Iram</h3><p class="text-slate-300 text-sm leading-relaxed">"Have you not considered how your Lord dealt with 'Aad, [with] Iram — who had lofty pillars?" (89:6-7) — Mentioned only in the Quran, discovered by archaeologists in the 1990s in Oman.</p><div class="verse-badge mt-4">Al-Fajr 89:6-7</div></div>
+                    <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><span class="text-4xl font-display text-gold-500/30 group-hover:text-gold-400/50 transition-colors block mb-4">04</span><h3 class="font-display text-xl font-bold text-white mb-3">The Dead Sea</h3><p class="text-slate-300 text-sm leading-relaxed">The cities of Lut (Sodom and Gomorrah) were destroyed by a shower of baked clay. The Dead Sea region contains the highest concentration of asphalt and sulfur on Earth.</p><div class="verse-badge mt-4">Al-Hijr 15:74</div></div>
+                    <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><span class="text-4xl font-display text-gold-500/30 group-hover:text-gold-400/50 transition-colors block mb-4">05</span><h3 class="font-display text-xl font-bold text-white mb-3">Haman in Egypt</h3><p class="text-slate-300 text-sm leading-relaxed">The Quran mentions Haman as Pharaoh's architect. Hieroglyphic discoveries confirmed "Haman" as a title for chief of works in ancient Egypt.</p><div class="verse-badge mt-4">Al-Qasas 28:38</div></div>
+                    <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><span class="text-4xl font-display text-gold-500/30 group-hover:text-gold-400/50 transition-colors block mb-4">06</span><h3 class="font-display text-xl font-bold text-white mb-3">The Wall of Dhul-Qarnayn</h3><p class="text-slate-300 text-sm leading-relaxed">Identified by historians as the Great Wall of Gorgan or Derbent in the Caucasus region — built as a barrier against Gog and Magog as described in (18:94-95).</p><div class="verse-badge mt-4">Al-Kahf 18:94-95</div></div>
+                </div>
+            </div>
+
+            <!-- m-mathematical-content  ← FIX: was "mathematical-content", now "m-mathematical-content" -->
+            <div class="tab-content" id="m-mathematical-content">
+                <div class="text-center mb-16 reveal">
+                    <span class="text-gold-400 text-sm tracking-[0.3em] uppercase font-display block mb-4">Divine Architecture</span>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-6">Mathematical <span class="text-gold-gradient">Miracles</span></h2>
+                    <p class="text-slate-300 text-lg max-w-2xl mx-auto">A mathematical code woven into the fabric of the text — challenging the world to produce a single chapter like it.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 mb-16">
+                    <div class="md:col-span-1 reveal">
+                        <div class="sticky top-32">
+                            <p class="arabic-text text-4xl text-gold-400 leading-loose mb-4 text-center md:text-right" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+                            <p class="text-slate-400 text-sm text-center md:text-right">19 letters. The opening formula of every Surah except one. The foundation of the numerical miracle.</p>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-950 hover:border-gold-400/30 transition-all reveal"><div class="text-3xl font-display text-gold-400 mb-2 counter-value" data-target="19">0</div><div class="text-white font-medium mb-1">Letters in Basmalah</div><div class="text-slate-400 text-xs">Exactly 19 Arabic letters</div></div>
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-950 hover:border-gold-400/30 transition-all reveal"><div class="text-3xl font-display text-gold-400 mb-2 counter-value" data-target="114">0</div><div class="text-white font-medium mb-1">Surahs in the Quran</div><div class="text-slate-400 text-xs">114 = 19 × 6</div></div>
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-950 hover:border-gold-400/30 transition-all reveal"><div class="text-3xl font-display text-gold-400 mb-2 counter-value" data-target="2698">0</div><div class="text-white font-medium mb-1">Occurrences of "Allah"</div><div class="text-slate-400 text-xs">2698 = 19 × 142</div></div>
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-950 hover:border-gold-400/30 transition-all reveal"><div class="text-3xl font-display text-gold-400 mb-2 counter-value" data-target="57">0</div><div class="text-white font-medium mb-1">Occurrences of "Quran"</div><div class="text-slate-400 text-xs">57 = 19 × 3</div></div>
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-950 hover:border-gold-400/30 transition-all reveal"><div class="text-3xl font-display text-gold-400 mb-2 counter-value" data-target="6555">0</div><div class="text-white font-medium mb-1">Sum of Surah+Verse Numbers</div><div class="text-slate-400 text-xs">6555 = 19 × 345</div></div>
+                        <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-950 hover:border-gold-400/30 transition-all reveal"><div class="text-3xl font-display text-gold-400 mb-2 counter-value" data-target="6346">0</div><div class="text-white font-medium mb-1">Total Verses</div><div class="text-slate-400 text-xs">6346 = 19 × 334</div></div>
+                    </div>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-12 items-center reveal">
+                    <div class="space-y-6">
+                        <h3 class="font-display text-3xl font-bold text-white">Perfect Word <span class="text-emerald-450">Symmetry</span></h3>
+                        <p class="text-slate-300 leading-relaxed">The Quran contains pairs of words that appear in perfect balance — matching counts that reflect their conceptual relationship.</p>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-4 border-b border-slate-800"><div class="text-slate-200 text-sm">"World" (Dunya) &amp; "Hereafter" (Akhirah)</div><div class="text-gold-400 font-display font-semibold">115 each</div></div>
+                            <div class="flex justify-between items-center p-4 border-b border-slate-800"><div class="text-slate-200 text-sm">"Angels" &amp; "Devils"</div><div class="text-gold-400 font-display font-semibold">88 each</div></div>
+                            <div class="flex justify-between items-center p-4 border-b border-slate-800"><div class="text-slate-200 text-sm">"Life" (Hayat) &amp; "Death" (Maut)</div><div class="text-gold-400 font-display font-semibold">145 each</div></div>
+                            <div class="flex justify-between items-center p-4 border-b border-slate-800"><div class="text-slate-200 text-sm">"Month" (Shahr) appears</div><div class="text-gold-400 font-display font-semibold">12 times</div></div>
+                            <div class="flex justify-between items-center p-4 border-b border-slate-800"><div class="text-slate-200 text-sm">"Day" (Yawm) appears</div><div class="text-gold-400 font-display font-semibold">365 times</div></div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-emerald-500/5 rounded-full blur-3xl"></div>
+                        <div class="relative border border-slate-800 rounded-2xl p-8 bg-cosmic-950">
+                            <div class="text-center mb-6"><span class="text-slate-400 text-xs uppercase tracking-widest">Land &amp; Sea Ratio</span></div>
+                            <div class="relative w-48 h-48 mx-auto mb-6">
+                                <svg viewBox="0 0 100 100" class="transform -rotate-90">
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="#141d2d" stroke-width="8"/>
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="#E5C158" stroke-width="8" stroke-dasharray="71 100" stroke-linecap="round"/>
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="#34D399" stroke-width="8" stroke-dasharray="29 100" stroke-dashoffset="-71" stroke-linecap="round"/>
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center flex-col"><span class="text-2xl font-display text-white">71%</span><span class="text-xs text-slate-400">Sea</span></div>
+                            </div>
+                            <p class="text-center text-slate-300 text-sm mb-4">The words "sea" (bahr) and "land" (barr) appear 32 and 13 times.</p>
+                            <div class="flex justify-center gap-8 text-xs">
+                                <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-gold-400"></div><span class="text-slate-400">Sea: 32 (71%)</span></div>
+                                <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-emerald-450"></div><span class="text-slate-400">Land: 13 (29%)</span></div>
+                            </div>
+                            <p class="text-center text-slate-500 text-xs mt-4 italic">Matching Earth's surface composition exactly — discovered via satellites in the 20th century.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- m-linguistic-content -->
+            <div class="tab-content" id="m-linguistic-content">
+                <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                    <div class="reveal">
+                        <h3 class="font-display text-3xl font-bold text-white mb-6">The Inimitable Eloquence</h3>
+                        <p class="text-slate-300 leading-relaxed mb-6">The Quran's linguistic miracle extends beyond meaning to structure, rhythm, and rhetorical devices impossible to replicate. The smallest chapter (Al-Kawthar, 3 verses) has defied imitation for 14 centuries.</p>
+                        <div class="space-y-4">
+                            <div class="p-4 border-l-2 border-gold-400 bg-cosmic-900/30"><h4 class="text-white font-medium mb-1">Unique Literary Form</h4><p class="text-slate-400 text-sm">Neither poetry nor prose — a unique Arabic form unprecedented in Arabic literature.</p></div>
+                            <div class="p-4 border-l-2 border-gold-400 bg-cosmic-900/30"><h4 class="text-white font-medium mb-1">Rhetorical Devices</h4><p class="text-slate-400 text-sm">Systematic use of shift in person, tense, and grammatical form that creates unmatched rhetorical effect.</p></div>
+                            <div class="p-4 border-l-2 border-gold-400 bg-cosmic-900/30"><h4 class="text-white font-medium mb-1">Semantically Coherent Yet Stylistically Varied</h4><p class="text-slate-400 text-sm">Despite 23 years of revelation, the Quran maintains internal consistency while displaying remarkable stylistic diversity.</p></div>
+                        </div>
+                    </div>
+                    <div class="reveal">
+                        <div class="p-8 rounded-2xl border border-slate-800 bg-cosmic-950">
+                            <p class="text-slate-300 text-center mb-6">The Challenge:</p>
+                            <p class="arabic-text text-2xl md:text-3xl text-gold-400 leading-loose mb-6 text-center" dir="rtl">فَاتُوا بِسُورَةٍ مِّن مِّثْلِهِ</p>
+                            <p class="text-slate-300 text-center italic mb-4">"Then bring a surah like it." (2:23)</p>
+                            <p class="text-slate-400 text-sm text-center">Arabs at the time were masters of eloquence, yet could not produce even a single chapter matching the Quran's linguistic excellence.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- m-prophecies-content -->
+            <div class="tab-content" id="m-prophecies-content">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><span class="text-gold-400 font-display text-sm tracking-wider block mb-3">FULFILLED</span><h3 class="font-display text-xl font-bold text-white mb-3">Victory of Byzantines</h3><p class="text-slate-300 text-sm mb-4">Predicted Byzantine victory over Persians within 3-9 years after their defeat — fulfilled exactly in 627 CE.</p><div class="verse-badge">Ar-Rum 30:2-4</div></div>
+                    <div class="p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><span class="text-gold-400 font-display text-sm tracking-wider block mb-3">FULFILLED</span><h3 class="font-display text-xl font-bold text-white mb-3">Conquest of Mecca</h3><p class="text-slate-300 text-sm mb-4">Allah promised the Prophet he would enter Mecca safely — fulfilled in 630 CE without bloodshed.</p><div class="verse-badge">Al-Fath 48:27</div></div>
+                    <div class="p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><span class="text-gold-400 font-display text-sm tracking-wider block mb-3">FULFILLED</span><h3 class="font-display text-xl font-bold text-white mb-3">Preservation of the Quran</h3><p class="text-slate-300 text-sm mb-4">"Indeed, it is We who sent down the Quran, and indeed, We will be its guardian." — Fulfilled for 1400+ years.</p><div class="verse-badge">Al-Hijr 15:9</div></div>
+                    <div class="p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><span class="text-gold-400 font-display text-sm tracking-wider block mb-3">FULFILLED</span><h3 class="font-display text-xl font-bold text-white mb-3">Roman-Persian Conflict</h3><p class="text-slate-300 text-sm mb-4">Detailed prophecy of the war between the two superpowers, including the location "nearest land" (Dead Sea region).</p><div class="verse-badge">Ar-Rum 30:1-3</div></div>
+                    <div class="p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><span class="text-gold-400 font-display text-sm tracking-wider block mb-3">IN PROGRESS</span><h3 class="font-display text-xl font-bold text-white mb-3">Development of Transportation</h3><p class="text-slate-300 text-sm mb-4">"And you will see the mountains and think them rigid, while they will pass as the passing of clouds." — Modern air travel perspective.</p><div class="verse-badge">An-Naml 27:88</div></div>
+                    <div class="p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><span class="text-gold-400 font-display text-sm tracking-wider block mb-3">FULFILLED</span><h3 class="font-display text-xl font-bold text-white mb-3">Rise of Materialism</h3><p class="text-slate-300 text-sm mb-4">Predicted humanity would become consumed by material acquisition and neglect spiritual matters in the end times.</p><div class="verse-badge">Multiple Hadith</div></div>
+                </div>
+            </div>
+
+        </div><!-- end miracles-content -->
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ ISLAM ═══ -->
+<section id="islam" class="relative py-32 px-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20 reveal">
+            <span class="text-gold-400 text-sm tracking-[0.3em] uppercase font-display block mb-4">The Path</span>
+            <h2 class="font-display text-4xl md:text-6xl font-bold text-white mb-6">Understanding <span class="text-gold-gradient">Islam</span></h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><div class="w-16 h-16 rounded-full border border-gold-400/20 flex items-center justify-center mb-6 group-hover:border-gold-400/50 transition-colors"><span class="font-display text-2xl text-gold-400">1</span></div><h3 class="font-display text-xl font-bold text-white mb-3">Tawhid</h3><p class="text-slate-400 text-sm leading-relaxed">The absolute oneness of God — the foundation of Islamic theology. No partners, no intermediaries, no incarnation.</p></div>
+            <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><div class="w-16 h-16 rounded-full border border-gold-400/20 flex items-center justify-center mb-6 group-hover:border-gold-400/50 transition-colors"><span class="font-display text-2xl text-gold-400">2</span></div><h3 class="font-display text-xl font-bold text-white mb-3">Prophethood</h3><p class="text-slate-400 text-sm leading-relaxed">From Adam to Muhammad ﷺ — a chain of 124,000 prophets conveying the same essential message of monotheism.</p></div>
+            <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><div class="w-16 h-16 rounded-full border border-gold-400/20 flex items-center justify-center mb-6 group-hover:border-gold-400/50 transition-colors"><span class="font-display text-2xl text-gold-400">3</span></div><h3 class="font-display text-xl font-bold text-white mb-3">Revelation</h3><p class="text-slate-400 text-sm leading-relaxed">The Quran as the final, preserved revelation — complemented by the authentic Sunnah explaining its application.</p></div>
+            <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><div class="w-16 h-16 rounded-full border border-gold-400/20 flex items-center justify-center mb-6 group-hover:border-gold-400/50 transition-colors"><span class="font-display text-2xl text-gold-400">4</span></div><h3 class="font-display text-xl font-bold text-white mb-3">Accountability</h3><p class="text-slate-400 text-sm leading-relaxed">Life as a test; the Day of Judgment; Paradise and Hellfire — justice administered by the All-Knowing.</p></div>
+            <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><div class="w-16 h-16 rounded-full border border-gold-400/20 flex items-center justify-center mb-6 group-hover:border-gold-400/50 transition-colors"><span class="font-display text-2xl text-gold-400">5</span></div><h3 class="font-display text-xl font-bold text-white mb-3">Sharia</h3><p class="text-slate-400 text-sm leading-relaxed">Divine guidance for individual and collective life — justice, family, economy, and governance based on revelation.</p></div>
+            <div class="group p-8 rounded-lg border border-slate-800 bg-cosmic-900/50 hover:border-gold-400/30 transition-all reveal"><div class="w-16 h-16 rounded-full border border-gold-400/20 flex items-center justify-center mb-6 group-hover:border-gold-400/50 transition-colors"><span class="font-display text-2xl text-gold-400">6</span></div><h3 class="font-display text-xl font-bold text-white mb-3">Purpose</h3><p class="text-slate-400 text-sm leading-relaxed">"And I did not create the jinn and mankind except to worship Me." — A life oriented toward the Creator.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ RESEARCH ═══ -->
+<section id="research" class="relative py-32 px-6 bg-cosmic-900/30">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20 reveal">
+            <span class="text-gold-400 text-sm tracking-[0.3em] uppercase font-display block mb-4">Investigation</span>
+            <h2 class="font-display text-4xl md:text-6xl font-bold text-white mb-6">Research <span class="text-gold-gradient">Methodology</span></h2>
+            <p class="text-slate-300 text-lg max-w-2xl mx-auto">Approach the evidence with intellectual honesty, critical thinking, and an open mind.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="space-y-6 reveal">
+                <div class="flex gap-6 p-6 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-gold-400/20 transition-colors"><div class="w-12 h-12 rounded-full bg-gold-400/10 flex items-center justify-center flex-shrink-0"><span class="text-gold-400 font-display">01</span></div><div><h3 class="text-white font-medium mb-2">Examine the Sources</h3><p class="text-slate-400 text-sm">Read the Quran directly. Verify claims against primary sources rather than secondary interpretations.</p></div></div>
+                <div class="flex gap-6 p-6 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-gold-400/20 transition-colors"><div class="w-12 h-12 rounded-full bg-gold-400/10 flex items-center justify-center flex-shrink-0"><span class="text-gold-400 font-display">02</span></div><div><h3 class="text-white font-medium mb-2">Check the Context</h3><p class="text-slate-400 text-sm">Understand historical, linguistic, and cultural context. Avoid cherry-picking verses without framework.</p></div></div>
+                <div class="flex gap-6 p-6 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-gold-400/20 transition-colors"><div class="w-12 h-12 rounded-full bg-gold-400/10 flex items-center justify-center flex-shrink-0"><span class="text-gold-400 font-display">03</span></div><div><h3 class="text-white font-medium mb-2">Follow the Evidence</h3><p class="text-slate-400 text-sm">Where does the preponderance of evidence lead? Follow truth regardless of preconceptions.</p></div></div>
+            </div>
+            <div class="space-y-6 reveal">
+                <div class="flex gap-6 p-6 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-gold-400/20 transition-colors"><div class="w-12 h-12 rounded-full bg-gold-400/10 flex items-center justify-center flex-shrink-0"><span class="text-gold-400 font-display">04</span></div><div><h3 class="text-white font-medium mb-2">Consult Experts</h3><p class="text-slate-400 text-sm">Refer to qualified linguists, historians, and scientists — not just theologians with vested interests.</p></div></div>
+                <div class="flex gap-6 p-6 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-gold-400/20 transition-colors"><div class="w-12 h-12 rounded-full bg-gold-400/10 flex items-center justify-center flex-shrink-0"><span class="text-gold-400 font-display">05</span></div><div><h3 class="text-white font-medium mb-2">Intellectual Humility</h3><p class="text-slate-400 text-sm">Recognize the limits of human knowledge. The absence of evidence is not evidence of absence.</p></div></div>
+                <div class="flex gap-6 p-6 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-gold-400/20 transition-colors"><div class="w-12 h-12 rounded-full bg-gold-400/10 flex items-center justify-center flex-shrink-0"><span class="text-gold-400 font-display">06</span></div><div><h3 class="text-white font-medium mb-2">Sincere Supplication</h3><p class="text-slate-400 text-sm">Ask the Creator for guidance: "Guide me to the truth" — a prayer promised to be answered.</p></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ PROTOCOL ═══ -->
+<section id="protocol" class="relative py-32 px-6">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16 reveal">
+            <span class="text-gold-400 text-sm tracking-[0.3em] uppercase font-display block mb-4">Dialogue</span>
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-6">Discussion <span class="text-gold-gradient">Protocol</span></h2>
+        </div>
+        <div class="space-y-6 reveal">
+            <div class="p-8 rounded-lg border border-slate-800 bg-cosmic-900/50">
+                <h3 class="font-display text-xl text-gold-400 mb-4">Ground Rules for Constructive Dialogue</h3>
+                <ul class="space-y-3 text-slate-300 text-sm">
+                    <li class="flex items-start gap-3"><span class="text-gold-400">1.</span><span>Address arguments, not individuals. No ad hominem attacks.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-gold-400">2.</span><span>Cite sources. Claims require evidence; extraordinary claims require extraordinary evidence.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-gold-400">3.</span><span>Avoid strawman arguments. Represent opposing views accurately and charitably.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-gold-400">4.</span><span>Acknowledge valid points. Intellectual honesty demands recognizing truth wherever found.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-gold-400">5.</span><span>Maintain respect. Disagreement is not disrespect — hostility impedes understanding.</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ AI COUNCIL ═══ -->
+<section id="ai-council" class="relative py-32 px-6 bg-cosmic-900/30">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20 reveal">
+            <span class="text-gold-400 text-sm tracking-[0.3em] uppercase font-display block mb-4">Modern Analysis</span>
+            <h2 class="font-display text-4xl md:text-6xl font-bold text-white mb-6">AI <span class="text-gold-gradient">Council</span></h2>
+            <p class="text-slate-300 text-lg max-w-2xl mx-auto">Artificial intelligence systems analyzing the Quran have identified patterns impossible for 7th-century humans to engineer.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="p-8 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-emerald-400/30 transition-all reveal">
+                <div class="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center mb-6"><svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+                <h3 class="font-display text-lg font-bold text-white mb-3">Pattern Recognition</h3>
+                <p class="text-slate-400 text-sm">Neural networks have identified complex intertextual relationships and structural symmetries across 114 chapters.</p>
+            </div>
+            <div class="p-8 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-emerald-400/30 transition-all reveal">
+                <div class="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center mb-6"><svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/></svg></div>
+                <h3 class="font-display text-lg font-bold text-white mb-3">Linguistic Analysis</h3>
+                <p class="text-slate-400 text-sm">Natural Language Processing confirms the Quran's unique linguistic fingerprint — distinct from all known Arabic corpora.</p>
+            </div>
+            <div class="p-8 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-emerald-400/30 transition-all reveal">
+                <div class="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center mb-6"><svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg></div>
+                <h3 class="font-display text-lg font-bold text-white mb-3">Predictive Modeling</h3>
+                <p class="text-slate-400 text-sm">Machine learning models trained on pre-Islamic texts cannot replicate Quranic stylistic features, confirming its inimitability.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ PERFECT PROOF ═══ -->
+<section id="perfect-proof" class="relative py-32 px-6">
+    <div class="max-w-4xl mx-auto text-center reveal">
+        <span class="text-gold-400 text-sm tracking-[0.3em] uppercase font-display block mb-4">The Ultimate Evidence</span>
+        <h2 class="font-display text-4xl md:text-6xl font-bold text-white mb-8">Perfect <span class="text-gold-gradient">Proof</span></h2>
+        <div class="p-8 md:p-12 rounded-2xl border border-gold-400/20 bg-gradient-to-br from-cosmic-900 to-cosmic-950 mb-12">
+            <p class="text-slate-300 text-lg leading-relaxed mb-8">The Quran presents a cumulative case: scientific foreknowledge, mathematical precision, historical accuracy, linguistic inimitability, fulfilled prophecies, and perfect preservation — converging on a single conclusion.</p>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+                <div class="p-4"><div class="text-3xl font-display text-gold-400 mb-2">7</div><div class="text-slate-400 text-xs uppercase tracking-wider">Lines of Evidence</div></div>
+                <div class="p-4"><div class="text-3xl font-display text-gold-400 mb-2">∞</div><div class="text-slate-400 text-xs uppercase tracking-wider">Statistical Significance</div></div>
+                <div class="p-4"><div class="text-3xl font-display text-gold-400 mb-2">0</div><div class="text-slate-400 text-xs uppercase tracking-wider">Successful Replications</div></div>
+            </div>
+        </div>
+        <p class="arabic-text text-3xl md:text-4xl text-gold-400 leading-loose mb-6" dir="rtl">كِتَابٌ أَنزَلْنَاهُ إِلَيْكَ مُبَارَكٌ لِّيَدَّبَّرُوا آيَاتِهِ وَلِيَتَذَكَّرَ أُولُو الْأَلْبَابِ</p>
+        <p class="text-slate-300 italic mb-4">"[This is] a blessed Book which We have revealed to you, [O Muhammad], that they might reflect upon its verses and that those of understanding would be reminded."</p>
+        <span class="text-gold-400 text-sm font-display tracking-wider">Sad 38:29</span>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════ PROOF PROPHETHOOD ═══ -->
+<section id="prophethood" class="relative py-32 px-6 bg-cosmic-900/30">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20 reveal">
+            <span class="text-gold-400 text-sm tracking-[0.3em] uppercase font-display block mb-4">Muhammad ﷺ</span>
+            <h2 class="font-display text-4xl md:text-6xl font-bold text-white mb-6">Proof of <span class="text-gold-gradient">Prophethood</span></h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-gold-400/30 transition-all reveal"><h3 class="font-display text-lg text-gold-400 mb-3">Illiteracy</h3><p class="text-slate-400 text-sm">Unlettered (ummi) — could neither read nor write, eliminating the possibility of research or literary training.</p></div>
+            <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-gold-400/30 transition-all reveal"><h3 class="font-display text-lg text-gold-400 mb-3">Character</h3><p class="text-slate-400 text-sm">Known as "Al-Amin" (the Trustworthy) even by enemies. Never lied before claiming prophethood — why start at age 40?</p></div>
+            <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-gold-400/30 transition-all reveal"><h3 class="font-display text-lg text-gold-400 mb-3">Sacrifice</h3><p class="text-slate-400 text-sm">Endured 13 years of persecution in Mecca. No material gain — lost wealth, status, and nearly his life.</p></div>
+            <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-gold-400/30 transition-all reveal"><h3 class="font-display text-lg text-gold-400 mb-3">Predictions</h3><p class="text-slate-400 text-sm">Prophesied specific events: conquest of Mecca, Persian-Roman war outcome, his own death — all fulfilled precisely.</p></div>
+            <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-gold-400/30 transition-all reveal"><h3 class="font-display text-lg text-gold-400 mb-3">Impact</h3><p class="text-slate-400 text-sm">Transformed desert Bedouins into civilization-builders within one generation. No other reformer matched this scale.</p></div>
+            <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-gold-400/30 transition-all reveal"><h3 class="font-display text-lg text-gold-400 mb-3">Consistency</h3><p class="text-slate-400 text-sm">23 years of revelation without contradiction. Lived his message — never exploited followers for personal gain.</p></div>
+            <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-gold-400/30 transition-all reveal"><h3 class="font-display text-lg text-gold-400 mb-3">Quran</h3><p class="text-slate-400 text-sm">The ultimate miracle — inimitable, preserved, scientifically accurate. Muhammad's only claim to supernatural support.</p></div>
+            <div class="p-6 rounded-lg border border-slate-800 bg-cosmic-950/50 hover:border-gold-400/30 transition-all reveal"><h3 class="font-display text-lg text-gold-400 mb-3">Legacy</h3><p class="text-slate-400 text-sm">Most influential human in history (Michael H. Hart, "The 100"). Changed the course of civilization permanently.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ VIDEOS ═══ -->
+<section id="videos" class="relative py-32 px-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20 reveal">
+            <span class="text-gold-400 text-sm tracking-[0.3em] uppercase font-display block mb-4">Multimedia</span>
+            <h2 class="font-display text-4xl md:text-6xl font-bold text-white mb-6">Video <span class="text-gold-gradient">Resources</span></h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="group rounded-lg border border-slate-800 bg-cosmic-950/50 overflow-hidden hover:border-gold-400/30 transition-all reveal"><div class="aspect-video bg-cosmic-900 flex items-center justify-center relative overflow-hidden"><div class="absolute inset-0 bg-gradient-to-t from-cosmic-950 to-transparent opacity-60"></div><div class="w-16 h-16 rounded-full border-2 border-gold-400/50 flex items-center justify-center group-hover:scale-110 transition-transform relative z-10"><svg class="w-6 h-6 text-gold-400 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div><div class="p-6"><h3 class="text-white font-medium mb-2">Scientific Miracles Explained</h3><p class="text-slate-400 text-sm">Comprehensive analysis of Quranic scientific foreknowledge.</p></div></div>
+            <div class="group rounded-lg border border-slate-800 bg-cosmic-950/50 overflow-hidden hover:border-gold-400/30 transition-all reveal"><div class="aspect-video bg-cosmic-900 flex items-center justify-center relative overflow-hidden"><div class="absolute inset-0 bg-gradient-to-t from-cosmic-950 to-transparent opacity-60"></div><div class="w-16 h-16 rounded-full border-2 border-gold-400/50 flex items-center justify-center group-hover:scale-110 transition-transform relative z-10"><svg class="w-6 h-6 text-gold-400 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div><div class="p-6"><h3 class="text-white font-medium mb-2">Mathematical Structure</h3><p class="text-slate-400 text-sm">The numerical code of the Quran decoded and verified.</p></div></div>
+            <div class="group rounded-lg border border-slate-800 bg-cosmic-950/50 overflow-hidden hover:border-gold-400/30 transition-all reveal"><div class="aspect-video bg-cosmic-900 flex items-center justify-center relative overflow-hidden"><div class="absolute inset-0 bg-gradient-to-t from-cosmic-950 to-transparent opacity-60"></div><div class="w-16 h-16 rounded-full border-2 border-gold-400/50 flex items-center justify-center group-hover:scale-110 transition-transform relative z-10"><svg class="w-6 h-6 text-gold-400 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div><div class="p-6"><h3 class="text-white font-medium mb-2">Bible vs Quran</h3><p class="text-slate-400 text-sm">Comparative textual analysis and preservation.</p></div></div>
+            <div class="group rounded-lg border border-slate-800 bg-cosmic-950/50 overflow-hidden hover:border-gold-400/30 transition-all reveal"><div class="aspect-video bg-cosmic-900 flex items-center justify-center relative overflow-hidden"><div class="absolute inset-0 bg-gradient-to-t from-cosmic-950 to-transparent opacity-60"></div><div class="w-16 h-16 rounded-full border-2 border-gold-400/50 flex items-center justify-center group-hover:scale-110 transition-transform relative z-10"><svg class="w-6 h-6 text-gold-400 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div><div class="p-6"><h3 class="text-white font-medium mb-2">Trinity Examined</h3><p class="text-slate-400 text-sm">Historical development and theological critique.</p></div></div>
+            <div class="group rounded-lg border border-slate-800 bg-cosmic-950/50 overflow-hidden hover:border-gold-400/30 transition-all reveal"><div class="aspect-video bg-cosmic-900 flex items-center justify-center relative overflow-hidden"><div class="absolute inset-0 bg-gradient-to-t from-cosmic-950 to-transparent opacity-60"></div><div class="w-16 h-16 rounded-full border-2 border-gold-400/50 flex items-center justify-center group-hover:scale-110 transition-transform relative z-10"><svg class="w-6 h-6 text-gold-400 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div><div class="p-6"><h3 class="text-white font-medium mb-2">Prophecies Fulfilled</h3><p class="text-slate-400 text-sm">Historical predictions verified by modern archaeology.</p></div></div>
+            <div class="group rounded-lg border border-slate-800 bg-cosmic-950/50 overflow-hidden hover:border-gold-400/30 transition-all reveal"><div class="aspect-video bg-cosmic-900 flex items-center justify-center relative overflow-hidden"><div class="absolute inset-0 bg-gradient-to-t from-cosmic-950 to-transparent opacity-60"></div><div class="w-16 h-16 rounded-full border-2 border-gold-400/50 flex items-center justify-center group-hover:scale-110 transition-transform relative z-10"><svg class="w-6 h-6 text-gold-400 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div><div class="p-6"><h3 class="text-white font-medium mb-2">Linguistic Miracle</h3><p class="text-slate-400 text-sm">Why the Quran is inimitable in Arabic eloquence.</p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ PRESERVATION ═══ -->
+<section id="preservation" class="relative py-32 px-6 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-cosmic-950 via-cosmic-900/30 to-cosmic-950"></div>
+    <div class="max-w-7xl mx-auto relative z-10">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="reveal">
+                <span class="text-gold-400 text-sm tracking-[0.3em] uppercase font-display block mb-4">Living Miracle</span>
+                <h2 class="font-display text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">Memorized by<br><span class="text-gold-gradient">Millions</span></h2>
+                <p class="text-slate-300 text-lg leading-relaxed mb-8">No other text exists in the minds of so many, word-for-word, letter-for-letter. Preserved not just in books — but in human memory across every continent and generation.</p>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4"><div class="w-12 h-12 rounded-full border border-gold-400/20 flex items-center justify-center flex-shrink-0"><span class="text-gold-400 font-display">01</span></div><div><h4 class="text-white font-medium mb-1">Oral Transmission Chain (Isnad)</h4><p class="text-slate-400 text-sm">Every reciter has an unbroken chain back to the Prophet Muhammad ﷺ, documented for 14 centuries.</p></div></div>
+                    <div class="flex items-start gap-4"><div class="w-12 h-12 rounded-full border border-gold-400/20 flex items-center justify-center flex-shrink-0"><span class="text-gold-400 font-display">02</span></div><div><h4 class="text-white font-medium mb-1">Ancient Manuscripts</h4><p class="text-slate-400 text-sm">1st century AH manuscripts exist in museums worldwide, matching today's text perfectly.</p></div></div>
+                    <div class="flex items-start gap-4"><div class="w-12 h-12 rounded-full border border-gold-400/20 flex items-center justify-center flex-shrink-0"><span class="text-gold-400 font-display">03</span></div><div><h4 class="text-white font-medium mb-1">The Challenge</h4><p class="text-slate-400 text-sm">"And if you are in doubt about what We have sent down upon Our Servant, then produce a surah the like thereof." (2:23)</p></div></div>
+                </div>
+            </div>
+            <div class="relative reveal">
+                <div class="absolute inset-0 bg-gold-400/5 rounded-full blur-3xl"></div>
+                <div class="relative grid grid-cols-2 gap-4">
+                    <div class="space-y-4 mt-8">
+                        <div class="h-48 rounded-lg border border-slate-800 bg-cosmic-900/80 flex items-center justify-center"><div class="text-center p-4"><div class="text-4xl font-display text-gold-400 mb-2 counter-value" data-target="10">0</div><div class="text-slate-400 text-xs uppercase tracking-wider">Million+ Huffaz</div></div></div>
+                        <div class="h-64 rounded-lg border border-slate-800 bg-cosmic-900/80 flex items-center justify-center"><div class="text-center p-4"><div class="text-4xl font-display text-emerald-450 mb-2 counter-value" data-target="114">0</div><div class="text-slate-400 text-xs uppercase tracking-wider">Surahs Memorized</div></div></div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="h-64 rounded-lg border border-slate-800 bg-cosmic-900/80 flex items-center justify-center"><div class="text-center p-4"><div class="text-4xl font-display text-gold-400 mb-2 counter-value" data-target="6236">0</div><div class="text-slate-400 text-xs uppercase tracking-wider">Verses</div></div></div>
+                        <div class="h-48 rounded-lg border border-slate-800 bg-cosmic-900/80 flex items-center justify-center"><div class="text-center p-4"><div class="text-4xl font-display text-emerald-450 mb-2 counter-value" data-target="1400">0</div><div class="text-slate-400 text-xs uppercase tracking-wider">Years Preserved</div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ CTA ═══ -->
+<section class="relative py-32 px-6">
+    <div class="max-w-4xl mx-auto text-center reveal">
+        <p class="arabic-text text-3xl md:text-5xl text-gold-400 leading-loose mb-8" dir="rtl">فَبِأَيِّ آلَاءِ رَبِّكُمَا تُكَذِّبَانِ</p>
+        <h2 class="font-display text-3xl md:text-5xl font-bold text-white mb-6">So which of the favors<br>of your Lord would you deny?</h2>
+        <p class="text-slate-300 text-lg mb-12 max-w-2xl mx-auto">The evidence is not hidden. It is before your eyes, in your cells, in the stars above, and in the very fabric of the book itself.</p>
+        <a href="#miracles" class="magnetic-btn inline-flex">Explore the Evidence</a>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ FOOTER ═══ -->
+<footer class="border-t border-slate-800/50 py-12 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="font-display text-gold-400 text-lg tracking-widest">AL-BURHAN</div>
+        <div class="text-slate-400 text-sm text-center">"We will show them Our signs in the horizons and within themselves until it becomes clear to them that it is the truth."</div>
+        <div class="text-slate-500 text-xs">Fussilat 41:53</div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="main.js"></script>
+</body>
+</html>
